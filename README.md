@@ -79,7 +79,7 @@ O projeto também busca conectar produção, custos e compras, permitindo que um
 # 👥 Membros da equipe
 | Nome | GitHub |
 | :--- | :--- |
-| Vitor Kawan | [KawanVitor1](https://github.com/KawanVitor1) |
-| Kayke | [kayke002](https://github.com/kayke002) |
-| Ayrton Mirand | [Ampds](https://github.com/Ampds) |
+| Vitor Kawan Barbosa Borges | [KawanVitor1](https://github.com/KawanVitor1) |
+| Kayke Zago Pinheiro | [kayke002](https://github.com/kayke002) |
+| Ayrton Miranda Pimenta da Silva | [Ampds](https://github.com/Ampds) |
 
