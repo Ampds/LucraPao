@@ -1,56 +1,85 @@
-# Welcome to your Expo app 👋
+# 💰LucraPão
+O LucraPão é um projeto desenvolvido voltado para pequenos produtores de alimentos, criado para facilitar o controle de custos, organização de receitas, compras de ingredientes e acompanhamento da lucratividade dos produtos.
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# 📌 Problema
 
-## Get started
+Pequenos produtores de alimentos muitas vezes precisam controlar manualmente informações como preços dos ingredientes, receitas, custos de produção, despesas e preços de venda.
 
-1. Install dependencies
+Essa falta de organização pode dificultar a identificação de quanto realmente custa produzir cada item e, consequentemente, quanto o produtor está lucrando.
 
-   ```bash
-   npm install
-   ```
+O LucraPão busca centralizar essas informações em uma única plataforma, tornando o acompanhamento dos custos e dos lucros mais simples e acessível.
 
-2. Start the app
+# 🎯 Público-alvo
 
-   ```bash
-   npx expo start
-   ```
+O projeto é destinado principalmente a pequenos produtores e empreendedores do setor alimentício, como:
 
-In the output, you'll find options to open the app in a
+🥖 Padarias e pequenos estabelecimentos;
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+🎂 Confeiteiros;
 
-## Get a fresh project
 
-When you're ready, run:
+🍰 Produtores de bolos e doces;
 
-```bash
-npm run reset-project
-```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+🥟 Produtores de salgados;
 
-### Other setup steps
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+🍞 Produtores artesanais;
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+🏠 Pessoas que produzem alimentos para venda.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
+# 🚀 Funcionalidades previstas
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- 🧾 Produtos e receitas
+
+    O usuário poderá cadastrar seus produtos e as receitas utilizadas para produzi-los, informando os ingredientes, quantidades e respectivos custos.
+
+- 🧮 Cálculo de custos
+
+    A partir dos dados cadastrados, o sistema calculará automaticamente o custo estimado de produção de cada produto.
+
+- 💰 Precificação e lucro
+
+    O usuário poderá informar o preço de venda e visualizar o lucro estimado e a margem de lucro de cada produto.
+
+- 📦 Controle de ingredientes
+
+    O sistema permitirá acompanhar os ingredientes utilizados na produção e suas respectivas quantidades e custos.
+
+- 🛒 Lista de compras
+
+    Com base nos produtos e ingredientes cadastrados, o usuário poderá organizar os itens necessários para suas próximas produções.
+
+- 🏪 Comparação de preços
+
+    Os preços dos ingredientes poderão ser comparados entre diferentes fornecedores cadastrados, ajudando o produtor a encontrar opções mais econômicas para suas compras.
+
+- 📊 Acompanhamento financeiro
+
+    O usuário poderá acompanhar informações relacionadas aos custos, vendas e lucros, facilitando a visualização do desempenho do negócio.
+
+- 📈 Histórico
+
+    O sistema poderá armazenar o histórico de custos e preços, permitindo observar alterações nos valores dos ingredientes e no custo final dos produtos.
+
+
+# 🌟 Diferencial
+
+O LucraPão busca oferecer uma solução simples e acessível, evitando a complexidade de sistemas de gestão empresarial mais completos.
+
+A proposta é permitir que pequenos produtores tenham uma visão mais clara de seus custos e resultados sem precisar utilizar planilhas ou ferramentas diferentes para cada etapa.
+
+O projeto também busca conectar produção, custos e compras, permitindo que uma alteração no preço dos ingredientes possa ser refletida no custo dos produtos.
+
+
+# 👥 Membros da equipe
+| Nome | GitHub |
+| :--- | :--- |
+| Vitor Kawan Barbosa Borges | [KawanVitor1](https://github.com/KawanVitor1) |
+| Kayke Zago Pinheiro | [kayke002](https://github.com/kayke002) |
+| Ayrton Miranda Pimenta da Silva | [Ampds](https://github.com/Ampds) |
+
