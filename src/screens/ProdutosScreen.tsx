@@ -78,7 +78,8 @@ export function ProdutosScreen() {
           <ProdutoCard
             produto={item}
             ingredientes={ingredientes}
-            onPress={() => router.push(`/produto/${item.id}`)}
+            onVisualizar={() => router.push(`/produto/${item.id}`)}
+            onEditar={() => router.push(`/produto/editar/${item.id}`)}
           />
         )}
       />
