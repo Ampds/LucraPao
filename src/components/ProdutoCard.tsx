@@ -7,10 +7,11 @@ import { colors, radius, spacing, typography, shadow } from '../theme/theme';
 interface ProdutoCardProps {
   produto: Produto;
   ingredientes: Ingrediente[];
-  onPress?: () => void;
+  onVisualizar?: () => void;
+  onEditar?: () => void;
 }
 
-export function ProdutoCard({ produto, ingredientes, onPress }: ProdutoCardProps) {
+export function ProdutoCard({ produto, ingredientes, onVisualizar, onEditar }: ProdutoCardProps) {
   const { custoUnitario, lucroUnitario, margemLucro } = calcularCustoProduto(
     produto,
     ingredientes
@@ -18,9 +19,10 @@ export function ProdutoCard({ produto, ingredientes, onPress }: ProdutoCardProps
   const lucroPositivo = lucroUnitario >= 0;
 
   return (
+    <View style={styles.card}>
     <Pressable
-      onPress={onPress}
-      style={({ pressed }) => [styles.card, pressed && styles.cardPressed]}
+      onPress={onVisualizar}
+      style={({ pressed }) => [styles.linhaPrincipal, pressed && styles.cardPressed]}
     >
       <View style={styles.emojiWrap}>
         <Text style={styles.emoji}>{produto.imagemEmoji}</Text>
@@ -54,18 +56,63 @@ export function ProdutoCard({ produto, ingredientes, onPress }: ProdutoCardProps
         <Text style={styles.margemLabel}>margem</Text>
       </View>
     </Pressable>
+
+    {(onVisualizar || onEditar) && (
+      <View style={styles.acoes}>
+        {onVisualizar && (
+          <Pressable style={[styles.botaoAcao, styles.botaoVer]} onPress={onVisualizar}>
+            <Text style={styles.botaoVerTexto}>Visualizar</Text>
+          </Pressable>
+        )}
+        {onEditar && (
+          <Pressable style={[styles.botaoAcao, styles.botaoEditar]} onPress={onEditar}>
+            <Text style={styles.botaoEditarTexto}>Editar</Text>
+          </Pressable>
+        )}
+      </View>
+    )}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: 'row',
-    alignItems: 'center',
     backgroundColor: colors.surface,
     borderRadius: radius.md,
     padding: spacing.md,
     marginBottom: spacing.sm,
     ...shadow.card,
+  },
+  linhaPrincipal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  acoes: {
+    flexDirection: 'row',
+    gap: spacing.sm,
+    marginTop: spacing.md,
+  },
+  botaoAcao: {
+    flex: 1,
+    borderRadius: radius.sm,
+    paddingVertical: spacing.sm,
+    alignItems: 'center',
+  },
+  botaoVer: {
+    backgroundColor: colors.surfaceAlt,
+  },
+  botaoVerTexto: {
+    fontSize: typography.size.label,
+    fontWeight: typography.weight.medium,
+    color: colors.crust,
+  },
+  botaoEditar: {
+    backgroundColor: colors.crust,
+  },
+  botaoEditarTexto: {
+    fontSize: typography.size.label,
+    fontWeight: typography.weight.medium,
+    color: colors.textOnCrust,
   },
   cardPressed: {
     opacity: 0.85,
