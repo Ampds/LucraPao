@@ -1,8 +1,11 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { Produto, Ingrediente } from '../types';
-import { calcularCustoProduto, formatarMoeda, formatarPercentual } from '../utils/calculos';
-import { colors, radius, spacing, typography, shadow } from '../theme/theme';
+import { Pressable, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import { colors, radius, shadow, spacing, typography } from '../theme/theme';
+import { Ingrediente, Produto } from '../types';
+import {
+  calcularCustoProduto,
+  formatarMoeda,
+  formatarPercentual,
+} from '../utils/calculos';
 
 interface ProdutoCardProps {
   produto: Produto;
@@ -11,7 +14,15 @@ interface ProdutoCardProps {
   onEditar?: () => void;
 }
 
-export function ProdutoCard({ produto, ingredientes, onVisualizar, onEditar }: ProdutoCardProps) {
+export function ProdutoCard({
+  produto,
+  ingredientes,
+  onVisualizar,
+  onEditar,
+}: ProdutoCardProps) {
+  const { width } = useWindowDimensions();
+  const compacto = width < 520;
+
   const { custoUnitario, lucroUnitario, margemLucro } = calcularCustoProduto(
     produto,
     ingredientes
@@ -20,63 +31,80 @@ export function ProdutoCard({ produto, ingredientes, onVisualizar, onEditar }: P
 
   return (
     <View style={styles.card}>
-    <Pressable
-      onPress={onVisualizar}
-      style={({ pressed }) => [styles.linhaPrincipal, pressed && styles.cardPressed]}
-    >
-      <View style={styles.emojiWrap}>
-        <Text style={styles.emoji}>{produto.imagemEmoji}</Text>
-      </View>
-
-      <View style={styles.info}>
-        <Text style={styles.nome}>{produto.nome}</Text>
-        <Text style={styles.categoria}>{produto.categoria}</Text>
-
-        <View style={styles.linhaValores}>
-          <Text style={styles.custoTexto}>
-            Custo: <Text style={styles.custoValor}>{formatarMoeda(custoUnitario)}</Text>
-          </Text>
-          <Text style={styles.vendaTexto}>
-            Venda: <Text style={styles.vendaValor}>{formatarMoeda(produto.precoVenda)}</Text>
-          </Text>
-        </View>
-      </View>
-
-      <View
-        style={[
-          styles.margemBadge,
-          { backgroundColor: lucroPositivo ? colors.profitBg : colors.costBg },
+      <Pressable
+        onPress={onVisualizar}
+        style={({ pressed }) => [
+          styles.linhaPrincipal,
+          compacto && styles.linhaPrincipalCompacta,
+          pressed && styles.cardPressed,
         ]}
       >
-        <Text
-          style={[styles.margemValor, { color: lucroPositivo ? colors.profit : colors.cost }]}
-        >
-          {formatarPercentual(margemLucro)}
-        </Text>
-        <Text style={styles.margemLabel}>margem</Text>
-      </View>
-    </Pressable>
+        <View style={styles.emojiWrap}>
+          <Text style={styles.emoji}>{produto.imagemEmoji}</Text>
+        </View>
 
-    {(onVisualizar || onEditar) && (
-      <View style={styles.acoes}>
-        {onVisualizar && (
-          <Pressable style={[styles.botaoAcao, styles.botaoVer]} onPress={onVisualizar}>
-            <Text style={styles.botaoVerTexto}>Visualizar</Text>
-          </Pressable>
-        )}
-        {onEditar && (
-          <Pressable style={[styles.botaoAcao, styles.botaoEditar]} onPress={onEditar}>
-            <Text style={styles.botaoEditarTexto}>Editar</Text>
-          </Pressable>
-        )}
-      </View>
-    )}
+        <View style={styles.info}>
+          <Text style={styles.nome} numberOfLines={2}>
+            {produto.nome}
+          </Text>
+          <Text style={styles.categoria}>{produto.categoria}</Text>
+
+          <View style={[styles.linhaValores, compacto && styles.linhaValoresCompacta]}>
+            <Text style={styles.custoTexto}>
+              Custo: <Text style={styles.custoValor}>{formatarMoeda(custoUnitario)}</Text>
+            </Text>
+            <Text style={styles.vendaTexto}>
+              Venda: <Text style={styles.vendaValor}>{formatarMoeda(produto.precoVenda)}</Text>
+            </Text>
+          </View>
+        </View>
+
+        <View
+          style={[
+            styles.margemBadge,
+            { backgroundColor: lucroPositivo ? colors.profitBg : colors.costBg },
+          ]}
+        >
+          <Text
+            style={[
+              styles.margemValor,
+              { color: lucroPositivo ? colors.profit : colors.cost },
+            ]}
+          >
+            {formatarPercentual(margemLucro)}
+          </Text>
+          <Text style={styles.margemLabel}>margem</Text>
+        </View>
+      </Pressable>
+
+      {(onVisualizar || onEditar) && (
+        <View style={styles.acoes}>
+          {onVisualizar && (
+            <Pressable
+              style={[styles.botaoAcao, styles.botaoVer]}
+              onPress={onVisualizar}
+            >
+              <Text style={styles.botaoVerTexto}>Visualizar</Text>
+            </Pressable>
+          )}
+
+          {onEditar && (
+            <Pressable
+              style={[styles.botaoAcao, styles.botaoEditar]}
+              onPress={onEditar}
+            >
+              <Text style={styles.botaoEditarTexto}>Editar</Text>
+            </Pressable>
+          )}
+        </View>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
+    width: '100%',
     backgroundColor: colors.surface,
     borderRadius: radius.md,
     padding: spacing.md,
@@ -86,6 +114,9 @@ const styles = StyleSheet.create({
   linhaPrincipal: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  linhaPrincipalCompacta: {
+    alignItems: 'flex-start',
   },
   acoes: {
     flexDirection: 'row',
@@ -131,6 +162,7 @@ const styles = StyleSheet.create({
   },
   info: {
     flex: 1,
+    minWidth: 0,
   },
   nome: {
     fontSize: typography.size.body,
@@ -144,7 +176,12 @@ const styles = StyleSheet.create({
   },
   linhaValores: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     gap: spacing.md,
+  },
+  linhaValoresCompacta: {
+    flexDirection: 'column',
+    gap: spacing.xs,
   },
   custoTexto: {
     fontSize: typography.size.caption,
@@ -168,6 +205,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
     paddingHorizontal: spacing.sm,
     minWidth: 64,
+    marginLeft: spacing.sm,
   },
   margemValor: {
     fontSize: typography.size.h2,
